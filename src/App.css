@@ -1,0 +1,10 @@
+.App {
+  position: relative;
+  max-width: 650px;
+  min-width: 350px;
+  width: 100vw;
+  border-radius: 10px;
+  background-color: #fafafa;
+  height: 100vh;
+  overflow: hidden;
+}

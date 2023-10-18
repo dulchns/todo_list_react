@@ -1,0 +1,17 @@
+.item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 10px;
+    color: #fafafa;
+    background-color: #6237A0;
+}
+
+.item__complited {
+    text-decoration: line-through;
+}
+
+.item__title {
+    width: 100%;
+}

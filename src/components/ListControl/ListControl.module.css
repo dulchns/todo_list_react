@@ -1,0 +1,24 @@
+.controls {
+    display: flex;
+    height: 35px;
+}
+
+.controls__input {
+    flex-grow: 1;
+    padding: 5px;
+    border: 1px solid #6237A0;
+    outline: none;
+    border-radius: 10px 0 0 10px;
+    font-family: inherit;
+    color: #6237A0;
+}
+
+.controls__btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 0 10px 10px 0;
+    color: #fafafa;
+    background-color: #6237A0;
+    font-family: inherit;
+    font-size: inherit;
+}

@@ -1,0 +1,22 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #6237A0;
+    border-radius: 10px;
+    color: #6237A0;
+}
+
+.header__date {
+    font-size: 0.8em;
+}
+
+.header__logout {
+    align-self: center;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-family: inherit;
+    color: #fafafa;
+    background-color: #6237A0;
+}

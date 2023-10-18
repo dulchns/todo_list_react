@@ -1,0 +1,25 @@
+.login__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+}
+
+.login__form input {
+    padding: 5px;
+    border: 1px solid #6237A0;
+    outline: none;
+    border-radius: 10px;
+    font-family: inherit;
+    color: #6237A0;
+}
+
+.login__form button {
+    align-self: center;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 10px;
+    font-family: inherit;
+    color: #fafafa;
+    background-color: #4A88DB;
+}
