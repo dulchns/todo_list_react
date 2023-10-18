@@ -5,12 +5,15 @@ import axios from "axios"
 import useFetch from "../../hooks/useFetch"
 import LoginForm from "../LoginForm/LoginForm"
 import Loader from "../UI/Loader/Loader"
+import Modal from "../UI/Loader/Modal/Modal"
+import Register from "../Register/Register"
 
 const Login = () => {
   const { setAuth } = useContext(AuthContext)
-  const clearData = { username: "", password: "" }
-  const [loginData, setLoginData] = useState(clearData)
-  const [serveFetch, isLoading, error] = useFetch(async (data) => {
+  const clearLoginData = { username: "", password: "" }
+  const [loginData, setLoginData] = useState(clearLoginData)
+  const [showModal, setShowModal] = useState(false)
+  const [serveLoginFetch, isLoading] = useFetch(async (data) => {
     const response = await axios.get(`http://localhost:3000/users`, {
       params: { username: data.username },
     })
@@ -18,12 +21,16 @@ const Login = () => {
     if (fetchedUser.password == data.password) {
       setAuth(fetchedUser)
     }
-    setLoginData(clearData)
+    setLoginData(clearLoginData)
   })
 
   const submit = (e) => {
     e.preventDefault()
-    serveFetch(loginData)
+    serveLoginFetch(loginData)
+  }
+
+  const closeModal = () => {
+    setShowModal(false)
   }
 
   return (
@@ -35,6 +42,17 @@ const Login = () => {
         setLoginData={setLoginData}
         submit={submit}
       />
+      <button
+        className={styles.register__btn}
+        onClick={() => setShowModal(true)}
+      >
+        Sign up
+      </button>
+      {showModal && (
+        <Modal close={closeModal}>
+          <Register logIn={serveLoginFetch}/>
+        </Modal>
+      )}
     </div>
   )
 }

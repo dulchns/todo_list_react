@@ -19,7 +19,7 @@ const LoginForm = ({loginData, setLoginData, submit}) => {
             setLoginData({ ...loginData, password: e.target.value })
           }
         />
-        <button>Login</button>
+        <button>Log in</button>
       </form>
   )
 }

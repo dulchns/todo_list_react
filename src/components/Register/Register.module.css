@@ -1,11 +1,11 @@
-.login__form {
+.register__form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 5px;
 }
 
-.login__form input {
+.register__form input {
     padding: 5px 10px;
     border: 1px solid #6237A0;
     outline: none;
@@ -14,7 +14,7 @@
     color: #6237A0;
 }
 
-.login__form button {
+.register__form button {
     align-self: center;
     padding: 5px 15px;
     border: none;
