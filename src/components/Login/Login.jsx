@@ -11,12 +11,12 @@ const Login = () => {
   const clearData = { username: "", password: "" }
   const [loginData, setLoginData] = useState(clearData)
   const [serveFetch, isLoading, error] = useFetch(async (data) => {
-    const response = await axios.get(
-      `http://localhost:3000/users?username=${data.username}`
-    )
-    const [fetchedUser] = response.data 
+    const response = await axios.get(`http://localhost:3000/users`, {
+      params: { username: data.username },
+    })
+    const [fetchedUser] = response.data
     if (fetchedUser.password == data.password) {
-        setAuth(fetchedUser)
+      setAuth(fetchedUser)
     }
     setLoginData(clearData)
   })
@@ -28,9 +28,13 @@ const Login = () => {
 
   return (
     <div className={styles.login__page}>
-      {isLoading && <Loader/>}
+      {isLoading && <Loader />}
       <div className={styles.login__img}></div>
-      <LoginForm loginData={loginData} setLoginData={setLoginData} submit={submit}/>
+      <LoginForm
+        loginData={loginData}
+        setLoginData={setLoginData}
+        submit={submit}
+      />
     </div>
   )
 }

@@ -1,10 +1,13 @@
 import { useContext, useState } from "react"
 import styles from "./ListControl.module.css"
 import { AuthContext } from "../../contexts/AuthContext"
+import axios from "axios"
+import useFetch from "../../hooks/useFetch"
 
 const ListControl = ({ adder }) => {
   const { isAuth: user } = useContext(AuthContext)
   const [input, setInput] = useState("")
+  const [serveFetch] = useFetch(async (data) => axios.post('http://localhost:3000/todos/', data))
   const addTask = (e) => {
     e.preventDefault()
     const newTask = {
@@ -15,6 +18,7 @@ const ListControl = ({ adder }) => {
     }
     adder((prev) => [newTask, ...prev])
     setInput("")
+    serveFetch(newTask)
   }
 
   return (
