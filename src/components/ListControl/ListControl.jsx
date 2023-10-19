@@ -4,11 +4,13 @@ import { AuthContext } from "../../contexts/AuthContext"
 import axios from "axios"
 import useFetch from "../../hooks/useFetch"
 
-const ListControl = ({ adder }) => {
+const ListControl = ({ requestData }) => {
   const { isAuth: user } = useContext(AuthContext)
   const [input, setInput] = useState("")
-  const [serveFetch] = useFetch(async (data) => axios.post('http://localhost:3000/todos/', data))
-  const addTask = (e) => {
+  const [serveFetch] = useFetch(async (data) =>
+    axios.post("http://localhost:3000/todos/", data)
+  )
+  const addTask = async (e) => {
     e.preventDefault()
     const newTask = {
       userId: user.id,
@@ -16,9 +18,9 @@ const ListControl = ({ adder }) => {
       title: input,
       completed: false,
     }
-    adder((prev) => [newTask, ...prev])
     setInput("")
-    serveFetch(newTask)
+    await serveFetch(newTask)
+    await requestData()
   }
 
   return (

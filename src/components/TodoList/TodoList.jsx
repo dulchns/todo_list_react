@@ -11,6 +11,7 @@ const TodoList = () => {
   const { isAuth: user } = useContext(AuthContext)
   const [todos, setTodos] = useState([])
   const [serveFetch, isLoading, error] = useFetch(async () => {
+    await new Promise((resolve) => setTimeout(() => resolve(), 500)) //imitating request delay
     const response = await axios.get(`http://localhost:3000/todos`, {
       params: { userId: user.id },
     })
@@ -26,8 +27,13 @@ const TodoList = () => {
   return (
     <div className={styles.todolist}>
       <ListHeader />
-      <ListDisplay data={sortedTodos} isLoading={isLoading} error={error} />
-      <ListControl adder={setTodos} />
+      <ListDisplay
+        data={sortedTodos}
+        isLoading={isLoading}
+        error={error}
+        requestData={serveFetch}
+      />
+      <ListControl requestData={serveFetch} />
     </div>
   )
 }

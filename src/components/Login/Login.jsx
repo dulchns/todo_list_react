@@ -14,6 +14,7 @@ const Login = () => {
   const [loginData, setLoginData] = useState(clearLoginData)
   const [showModal, setShowModal] = useState(false)
   const [serveLoginFetch, isLoading] = useFetch(async (data) => {
+    await new Promise((resolve) => setTimeout(() => resolve(), 500)) //imitating request delay
     const response = await axios.get(`http://localhost:3000/users`, {
       params: { username: data.username },
     })
@@ -50,7 +51,7 @@ const Login = () => {
       </button>
       {showModal && (
         <Modal close={closeModal}>
-          <Register logIn={serveLoginFetch}/>
+          <Register logIn={serveLoginFetch} />
         </Modal>
       )}
     </div>
