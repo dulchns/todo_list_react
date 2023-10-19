@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useState, memo } from "react"
 import styles from "./ListControl.module.css"
 import { AuthContext } from "../../contexts/AuthContext"
 import axios from "axios"
@@ -35,4 +35,4 @@ const ListControl = ({ requestData }) => {
     </form>
   )
 }
-export default ListControl
+export default memo(ListControl)

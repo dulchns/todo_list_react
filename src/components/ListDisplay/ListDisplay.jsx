@@ -1,3 +1,4 @@
+import { memo } from "react"
 import ListItem from "../ListItem/ListItem"
 import Loader from "../UI/Loader/Loader"
 import styles from "./ListDisplay.module.css"
@@ -17,4 +18,4 @@ const ListDisplay = ({ data, requestData, isLoading, error }) => {
     </div>
   )
 }
-export default ListDisplay
+export default memo(ListDisplay)

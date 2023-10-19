@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, memo } from 'react'
 import styles from './ListHeader.module.css'
 import { AuthContext } from '../../contexts/AuthContext'
 
@@ -15,4 +15,4 @@ const ListHeader = () => {
     </div>
   )
 }
-export default ListHeader
+export default memo(ListHeader)

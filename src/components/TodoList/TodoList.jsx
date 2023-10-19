@@ -1,11 +1,11 @@
-import { useContext, useEffect, useMemo, useState } from "react"
+import axios from "axios"
+import { useCallback, useContext, useEffect, useMemo, useState } from "react"
 import { AuthContext } from "../../contexts/AuthContext"
+import useFetch from "../../hooks/useFetch"
 import ListControl from "../ListControl/ListControl"
 import ListDisplay from "../ListDisplay/ListDisplay"
 import ListHeader from "../ListHeader/ListHeader"
 import styles from "./TodoList.module.css"
-import useFetch from "../../hooks/useFetch"
-import axios from "axios"
 
 const TodoList = () => {
   const { isAuth: user } = useContext(AuthContext)
@@ -17,9 +17,10 @@ const TodoList = () => {
     })
     setTodos(response.data)
   })
-
+  const requestData = useCallback(serveFetch, [])
   useEffect(() => {
     serveFetch()
+     
   }, [])
 
   const sortedTodos = useMemo(() => todos.sort((a, b) => b.id - a.id), [todos])
@@ -33,7 +34,7 @@ const TodoList = () => {
         error={error}
         requestData={serveFetch}
       />
-      <ListControl requestData={serveFetch} />
+      <ListControl requestData={requestData} />
     </div>
   )
 }
