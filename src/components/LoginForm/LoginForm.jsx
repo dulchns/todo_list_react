@@ -1,9 +1,11 @@
+import { memo } from 'react'
 import styles from './LoginForm.module.css'
 
 const LoginForm = ({loginData, setLoginData, submit}) => {
   return (
     <form className={styles.login__form} onSubmit={submit}>
         <input
+          required
           type="text"
           placeholder="Username"
           value={loginData.username}
@@ -12,6 +14,7 @@ const LoginForm = ({loginData, setLoginData, submit}) => {
           }
         />
         <input
+          required
           type="text"
           placeholder="Password"
           value={loginData.password}
@@ -23,4 +26,4 @@ const LoginForm = ({loginData, setLoginData, submit}) => {
       </form>
   )
 }
-export default LoginForm
+export default memo(LoginForm)

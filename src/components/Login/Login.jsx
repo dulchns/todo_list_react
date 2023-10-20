@@ -1,12 +1,12 @@
-import { useContext, useState } from "react"
-import styles from "./Login.module.css"
+import { useCallback, useContext, useState } from "react"
 import { AuthContext } from "../../contexts/AuthContext"
-import axios from "axios"
 import useFetch from "../../hooks/useFetch"
 import LoginForm from "../LoginForm/LoginForm"
-import Loader from "../UI/Loader/Loader"
-import Modal from "../UI/Loader/Modal/Modal"
+import PostService from "../PostService/PostService"
 import Register from "../Register/Register"
+import Loader from "../UI/Loader/Loader"
+import Modal from "../UI//Modal/Modal"
+import styles from "./Login.module.css"
 
 const Login = () => {
   const { setAuth } = useContext(AuthContext)
@@ -15,20 +15,16 @@ const Login = () => {
   const [showModal, setShowModal] = useState(false)
   const [serveLoginFetch, isLoading] = useFetch(async (data) => {
     await new Promise((resolve) => setTimeout(() => resolve(), 500)) //imitating request delay
-    const response = await axios.get(`http://localhost:3000/users`, {
-      params: { username: data.username },
-    })
+    const response = await PostService.getUser(data.username)
     const [fetchedUser] = response.data
-    if (fetchedUser.password == data.password) {
-      setAuth(fetchedUser)
-    }
+    if (fetchedUser.password == data.password) setAuth(fetchedUser)
     setLoginData(clearLoginData)
   })
 
-  const submit = (e) => {
+  const submit = useCallback((e) => {
     e.preventDefault()
     serveLoginFetch(loginData)
-  }
+  }, [loginData])
 
   const closeModal = () => {
     setShowModal(false)

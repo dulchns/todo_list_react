@@ -1,26 +1,33 @@
-import { useState } from "react"
-import styles from "./ListItem.module.css"
+import { memo, useState } from "react"
 import useFetch from "../../hooks/useFetch"
-import axios from "axios"
+import PostService from "../PostService/PostService"
+import styles from "./ListItem.module.css"
 
-const ListItem = ({ todo, requestData }) => {
+const ListItem = ({ todoData, setData }) => {
+  const [todo, setTodo] = useState(todoData)
   const [deleteFetch] = useFetch(async () => {
-    await axios.delete(`http://localhost:3000/todos/${todo.id}`)
+    await PostService.deleteUserTodo(todo.id)
   })
-  const [check, setCheck] = useState(todo.completed)
-  let rootClass = [styles.item]
-  if (check) rootClass.push(styles.item__complited)
+  const [updateFetch] = useFetch(async (data) => {
+    await PostService.updateUserTodo(todo.id, data)
+  })
+  const rootClass = [styles.item]
+  if (todo.completed) rootClass.push(styles.item__complited)
+
   const deleteItem = async () => {
     await deleteFetch()
-    await requestData()
+    setData((prev) => prev.filter((el) => el.id !== todo.id))
   }
+
+  const changeCheckBox = async () => {
+    const modifiedTodo = { ...todo, completed: !todo.completed }
+    await updateFetch(modifiedTodo)
+    setTodo(modifiedTodo)
+  }
+
   return (
     <div className={rootClass.join(" ")}>
-      <input
-        type="checkbox"
-        checked={check}
-        onChange={() => setCheck(!check)}
-      />
+      <input type="checkbox" checked={todo.completed} onChange={changeCheckBox} />
       <p className={styles.item__title}>{todo.title}</p>
       <div className={styles.item__controls}>
         <img src="/images/edit.svg" />
@@ -31,4 +38,4 @@ const ListItem = ({ todo, requestData }) => {
     </div>
   )
 }
-export default ListItem
+export default memo(ListItem)
