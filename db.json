@@ -328,15 +328,9 @@
     },
     {
       "userId": 1,
-      "id": 14,
-      "title": "repellendus sunt dolores architecto voluptatum",
-      "completed": true
-    },
-    {
-      "userId": 1,
       "id": 15,
       "title": "ab voluptatum amet voluptas",
-      "completed": false
+      "completed": true
     },
     {
       "userId": 2,
@@ -1416,18 +1410,6 @@
       "userId": 10,
       "id": 200,
       "title": "ipsam aperiam voluptates qui",
-      "completed": false
-    },
-    {
-      "userId": 1697653504283,
-      "id": 1697653798342,
-      "title": "dfgdfgfdg",
-      "completed": false
-    },
-    {
-      "userId": 1,
-      "id": 1697810252697,
-      "title": "bjhbhbj",
       "completed": false
     },
     {

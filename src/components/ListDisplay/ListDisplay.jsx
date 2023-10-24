@@ -6,6 +6,7 @@ import styles from "./ListDisplay.module.css"
 const ListDisplay = ({ data, setData, isLoading, error }) => {
   if (isLoading) return <Loader />
   if (error) return <div>Error: {error}! Try reload page!</div>
+  if (!data) return
   return (
     <div className={styles.display}>
       {data.length ? (
